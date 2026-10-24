@@ -1,0 +1,81 @@
+sk_producto,cod_producto,descripcion,cod_tipo_producto,tipo_producto,estado_producto,precio_lista,fecha_inicio,fecha_fin,es_vigente
+1,000001,Arroz Costeño 1 kg,ABARR ,Arroz,Activo,4.5,2025-01-01,,True
+2,000002,Arroz superior a granel 1 kg,ABARR ,Arroz,Activo,3.8,2025-01-01,,True
+3,000003,Azúcar rubia 1 kg,ABARR ,Azúcar,Activo,4.2,2025-01-01,,True
+4,000004,Azúcar blanca 1 kg,ABARR ,Azúcar,Activo,4.5,2025-01-01,,True
+5,000005,Fideos spaghetti 500 g,ABARR ,Pastas,Activo,3.2,2025-01-01,,True
+6,000006,Fideos cabello de ángel 250 g,ABARR ,Pastas,Activo,1.8,2025-01-01,,True
+7,000007,Aceite vegetal 900 ml,ABARR ,Aceites,Activo,8.5,2025-01-01,,True
+8,000008,Aceite vegetal 1 L,ABARR ,Aceites,Activo,9.2,2025-01-01,,True
+9,000009,Sal yodada 1 kg,ABARR ,Condimentos,Activo,2.0,2025-01-01,,True
+10,000010,Lenteja 500 g,ABARR ,Menestras,Activo,4.0,2025-01-01,,True
+11,000011,Frejol canario 500 g,ABARR ,Menestras,Activo,5.5,2025-01-01,,True
+12,000012,Arveja partida 500 g,ABARR ,Menestras,Activo,3.8,2025-01-01,,True
+13,000013,Atún en agua 170 g,ABARR ,Conservas,Activo,5.8,2025-01-01,,True
+14,000014,Sardina en tomate 155 g,ABARR ,Conservas,Activo,4.2,2025-01-01,,True
+15,000015,Leche evaporada 400 g,LACTEO,Leche,Activo,4.2,2025-01-01,,True
+16,000016,Leche UHT entera 1 L,LACTEO,Leche,Activo,5.5,2025-01-01,,True
+17,000017,Yogur fresa 1 L,LACTEO,Yogur,Activo,7.5,2025-01-01,,True
+18,000018,Mantequilla 200 g,LACTEO,Mantequilla,Activo,8.0,2025-01-01,,True
+19,000019,Queso fresco 250 g,LACTEO,Quesos,Activo,7.0,2025-01-01,,True
+20,000020,Huevos pardos docena,FRESCO,Huevos,Activo,9.0,2025-01-01,,True
+21,000021,Pan de molde blanco 500 g,PANAD ,Pan empacado,Activo,7.5,2025-01-01,,True
+22,000022,Galletas de soda 6 pack,GOLOSI,Galletas,Activo,4.0,2025-01-01,,True
+23,000023,Galletas de vainilla paquete,GOLOSI,Galletas,Activo,2.2,2025-01-01,,True
+24,000024,Chocolate barra 45 g,GOLOSI,Chocolates,Activo,3.0,2025-01-01,,True
+25,000025,Caramelos surtidos 100 g,GOLOSI,Caramelos,Activo,2.5,2025-01-01,,True
+26,000026,Papas fritas 150 g,SNACKS,Snacks,Activo,4.5,2025-01-01,,True
+27,000027,Chifles 100 g,SNACKS,Snacks,Activo,3.5,2025-01-01,,True
+28,000028,Maní salado 100 g,SNACKS,Snacks,Activo,2.8,2025-01-01,,True
+29,000029,Gaseosa cola personal 500 ml,BEBIDA,Gaseosas,Activo,2.5,2025-01-01,,True
+30,000030,Gaseosa cola 1.5 L,BEBIDA,Gaseosas,Activo,6.5,2025-01-01,,True
+31,000031,Gaseosa naranja 1.5 L,BEBIDA,Gaseosas,Activo,5.8,2025-01-01,,True
+32,000032,Agua sin gas 625 ml,BEBIDA,Agua,Activo,1.5,2025-01-01,,True
+33,000033,Agua sin gas 2.5 L,BEBIDA,Agua,Activo,3.0,2025-01-01,,True
+34,000034,Jugo néctar durazno 1 L,BEBIDA,Jugos,Activo,4.5,2025-01-01,,True
+35,000035,Bebida energizante 250 ml,BEBIDA,Energizantes,Activo,4.0,2025-01-01,,True
+36,000036,Café instantáneo 50 g,DESAYU,Café,Activo,7.0,2025-01-01,,True
+37,000037,Café molido 250 g,DESAYU,Café,Activo,12.0,2025-01-01,,True
+38,000038,Avena tradicional 500 g,DESAYU,Cereales,Activo,4.0,2025-01-01,,True
+39,000039,Hojuelas de maíz 300 g,DESAYU,Cereales,Activo,8.5,2025-01-01,,True
+40,000040,Cocoa en polvo 160 g,DESAYU,Cocoa,Activo,5.5,2025-01-01,,True
+41,000041,Harina sin preparar 1 kg,ABARR ,Harinas,Activo,4.0,2025-01-01,,True
+42,000042,Maicena fécula 250 g,ABARR ,Harinas,Activo,3.2,2025-01-01,,True
+43,000043,Vinagre blanco 500 ml,ABARR ,Aderezos,Activo,2.5,2025-01-01,,True
+44,000044,Mayonesa frasco 500 g,ABARR ,Salsas,Activo,8.5,2025-01-01,,True
+45,000045,Kétchup frasco 400 g,ABARR ,Salsas,Activo,5.5,2025-01-01,,True
+46,000046,Sillao 500 ml,ABARR ,Salsas,Activo,4.5,2025-01-01,,True
+47,000047,Detergente en polvo 800 g,LIMPIE,Detergentes,Activo,8.5,2025-01-01,,True
+48,000048,Lavavajilla 750 ml,LIMPIE,Lavavajillas,Activo,6.5,2025-01-01,,True
+49,000049,Lejía 1 L,LIMPIE,Desinfectantes,Activo,3.5,2025-01-01,,True
+50,000050,Limpiador multiuso 900 ml,LIMPIE,Desinfectantes,Activo,5.5,2025-01-01,,True
+51,000051,Jabón de lavar ropa unidad,LIMPIE,Jabones,Activo,2.5,2025-01-01,,True
+52,000052,Papel higiénico 4 rollos,CUIDAD,Papel higiénico,Activo,8.5,2025-01-01,,True
+53,000053,Pañuelos faciales 100 unidades,CUIDAD,Papel,Activo,4.0,2025-01-01,,True
+54,000054,Jabón de tocador 90 g,CUIDAD,Jabones,Activo,3.0,2025-01-01,,True
+55,000055,Shampoo sachet 18 ml,CUIDAD,Cuidado capilar,Activo,1.0,2025-01-01,,True
+56,000056,Pasta dental 90 g,CUIDAD,Higiene bucal,Activo,5.5,2025-01-01,,True
+57,000057,Cepillo dental adulto,CUIDAD,Higiene bucal,Activo,4.5,2025-01-01,,True
+58,000058,Toallas higiénicas 8 unidades,CUIDAD,Higiene femenina,Activo,5.0,2025-01-01,,True
+59,000059,Pañales talla M paquete pequeño,BEBE  ,Pañales,Activo,12.0,2025-01-01,,True
+60,000060,Colado infantil 113 g,BEBE  ,Alimentos infantiles,Activo,3.5,2025-01-01,,True
+61,000061,Comida para perro 1 kg,MASCOT,Alimento mascotas,Activo,9.5,2025-01-01,,True
+62,000062,Comida para gato 500 g,MASCOT,Alimento mascotas,Activo,6.0,2025-01-01,,True
+63,000063,Cebolla roja 1 kg,FRESCO,Verduras,Activo,3.5,2025-01-01,,True
+64,000064,Papa blanca 1 kg,FRESCO,Tubérculos,Activo,3.0,2025-01-01,,True
+65,000065,Limón 1 kg,FRESCO,Frutas,Activo,4.0,2025-01-01,,True
+66,000066,Plátano de seda 1 kg,FRESCO,Frutas,Activo,4.5,2025-01-01,,True
+67,000067,Manzana corriente 1 kg,FRESCO,Frutas,Activo,5.5,2025-01-01,,True
+68,000068,Tomate 1 kg,FRESCO,Verduras,Activo,4.0,2025-01-01,,True
+69,000069,Zanahoria 1 kg,FRESCO,Verduras,Activo,2.5,2025-01-01,,True
+70,000070,Ajo molido 100 g,ABARR ,Condimentos,Activo,3.0,2025-01-01,,True
+71,000071,Orégano seco 20 g,ABARR ,Condimentos,Activo,1.5,2025-01-01,,True
+72,000072,Ají amarillo pasta 200 g,ABARR ,Salsas,Activo,4.0,2025-01-01,,True
+73,000073,Gelatina sabor fresa 150 g,POSTRE,Postres,Activo,2.5,2025-01-01,,True
+74,000074,Flan instantáneo 100 g,POSTRE,Postres,Activo,3.0,2025-01-01,,True
+75,000075,Mermelada fresa 250 g,DESAYU,Untables,Activo,5.5,2025-01-01,,True
+76,000076,Miel de abeja 250 g,DESAYU,Untables,Activo,12.0,2025-01-01,,True
+77,000077,Chocolate para taza 90 g,DESAYU,Chocolate,Activo,4.5,2025-01-01,,True
+78,000078,Chicha morada instantánea 500 g,BEBIDA,Refrescos,Activo,7.0,2025-01-01,,True
+79,000079,Refresco en polvo sobre,BEBIDA,Refrescos,Activo,0.8,2025-01-01,,True
+80,000080,Cerveza lager botella 620 ml,BEBIDA,Cervezas,Activo,6.0,2025-01-01,,True

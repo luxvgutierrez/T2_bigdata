@@ -1,0 +1,21 @@
+sk_trabajador,id_trabajador,dni,nombres,apellidos,fecha_nacimiento,tipo_trabajador,cat_laboral,fecha_inicio,fecha_fin,es_vigente
+1,T00001,71000001  ,María,Quispe Rojas,1995-03-12,Cajero,Ventas,2024-01-10,,True
+2,T00002,71000002  ,José,Flores García,1992-07-24,Cajero,Ventas,2024-02-01,,True
+3,T00003,71000003  ,Luis,Mendoza Torres,1998-11-05,Reponedor,Operaciones,2024-03-15,,True
+4,T00004,71000004  ,Rosa,Ramírez Huamán,1990-01-19,Administrador,Administración,2023-06-01,,True
+5,T00005,71000005  ,Carlos,Castillo Vargas,1997-04-30,Cajero,Ventas,2024-05-20,,True
+6,T00006,71000006  ,Ana,Chávez Paredes,1994-09-14,Almacenero,Operaciones,2024-06-03,,True
+7,T00007,71000007  ,Jorge,Gutiérrez Sánchez,1991-12-02,Cajero,Ventas,2024-07-01,,True
+8,T00008,71000008  ,Carmen,Fernández Cruz,1999-02-27,Reponedor,Operaciones,2024-08-12,,True
+9,T00009,71000009  ,Miguel,Díaz Medina,1993-06-18,Supervisor,Administración,2023-04-01,,True
+10,T00010,71000010  ,Lucía,Vásquez Herrera,1996-10-09,Cajero,Ventas,2024-09-02,,True
+11,T00011,71000011  ,Pedro,Salazar Cárdenas,1990-08-21,Almacenero,Operaciones,2023-09-11,,True
+12,T00012,71000012  ,Patricia,Espinoza Reyes,1995-05-16,Cajero,Ventas,2024-10-01,,True
+13,T00013,71000013  ,Juan,Morales Aguilar,1998-01-08,Reponedor,Operaciones,2025-01-02,,True
+14,T00014,71000014  ,Claudia,Poma Campos,1992-03-29,Cajero,Ventas,2025-02-10,,True
+15,T00015,71000015  ,Diego,León Romero,1997-12-17,Auxiliar de almacén,Operaciones,2025-03-01,,True
+16,T00016,71000016  ,Elena,Torres Flores,1991-09-25,Cajero,Ventas,2025-04-14,,True
+17,T00017,71000017  ,Fernando,Rojas Quispe,1994-02-11,Compras,Abastecimiento,2024-01-15,,True
+18,T00018,71000018  ,Sofía,García Mendoza,1996-07-07,Administrador,Administración,2024-04-01,,True
+19,T00019,71000019  ,Ricardo,Huamán Castillo,1989-11-30,Supervisor,Administración,2023-01-10,,True
+20,T00020,71000020  ,Valeria,Vargas Chávez,2000-06-22,Cajero,Ventas,2025-05-05,,True

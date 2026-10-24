@@ -1,0 +1,87 @@
+import pandas as pd
+import os
+
+def limpiar_y_procesar_todo():
+    carpeta_raw = './raw'
+    carpeta_salida = './processed'
+    
+    # Crear la carpeta processed si no existe
+    if not os.path.exists(carpeta_salida):
+        os.makedirs(carpeta_salida)
+        print(f"Carpeta '{carpeta_salida}' creada.")
+
+    # Lista completa de las tablas de tu modelo dimensional
+    tablas = [
+        'Fact_Ventas', 
+        'Fact_Compras', 
+        'Fact_Inventario_Snapshot',
+        'Dim_Producto', 
+        'Dim_Cliente', 
+        'Dim_Proveedor',
+        'Dim_Trabajador', 
+        'Dim_Tiempo'
+    ]
+
+    print("Iniciando limpieza masiva de datos (RNF03)...\n")
+
+    for tabla in tablas:
+        ruta_entrada = f'{carpeta_raw}/{tabla}.csv'
+        
+        # Validar si el archivo crudo existe antes de intentar limpiarlo
+        if not os.path.exists(ruta_entrada):
+            print(f"Advertencia: No se encontró el archivo {ruta_entrada}. Saltando...")
+            continue
+            
+        print(f"Procesando {tabla}...")
+        
+        try:
+            # 1. Cargar el archivo crudo
+            df = pd.read_csv(ruta_entrada)
+            
+            # 2. Regla general obligatoria: Eliminar duplicados exactos
+            df = df.drop_duplicates()
+            
+            # 3. Reglas de calidad específicas por cada tabla (Inconsistencias y Nulos)
+            if tabla == 'Fact_Ventas':
+                # Evitar cantidades o importes negativos, y claves nulas
+                df = df[(df['cantidad'] > 0) & (df['importe_total'] >= 0)]
+                df = df.dropna(subset=['sk_cliente', 'sk_producto', 'sk_tiempo', 'sk_trabajador'])
+                
+            elif tabla == 'Fact_Compras':
+                # Evitar cantidades o precios negativos, y claves nulas
+                df = df[(df['cantidad'] > 0) & (df['precio_unitario'] >= 0)]
+                df = df.dropna(subset=['sk_proveedor', 'sk_producto', 'sk_tiempo', 'sk_trabajador'])
+                
+            elif tabla == 'Fact_Inventario_Snapshot':
+                # El stock no puede ser negativo
+                df = df[df['stock_cantidad'] >= 0]
+                df = df.dropna(subset=['sk_producto', 'sk_tiempo'])
+                
+            elif tabla == 'Dim_Cliente':
+                df = df.dropna(subset=['id_cliente', 'nombres', 'apellidos'])
+                
+            elif tabla == 'Dim_Producto':
+                df = df.dropna(subset=['cod_producto', 'descripcion', 'precio_lista'])
+                
+            elif tabla == 'Dim_Proveedor':
+                df = df.dropna(subset=['id_provedor', 'nombre_proveedor'])
+                
+            elif tabla == 'Dim_Trabajador':
+                df = df.dropna(subset=['id_trabajador', 'nombres', 'apellidos'])
+                
+            elif tabla == 'Dim_Tiempo':
+                df = df.dropna(subset=['sk_tiempo', 'fecha'])
+
+            # 4. Guardar el archivo limpio en la carpeta 'processed'
+            ruta_salida = f'{carpeta_salida}/{tabla}_Limpio.csv'
+            df.to_csv(ruta_salida, index=False, encoding='utf-8')
+            print(f" -> ¡Éxito! Guardado como: {tabla}_Limpio.csv\n")
+            
+        except Exception as e:
+            # Control de errores según tu arquitectura
+            print(f" -> Error al limpiar la tabla {tabla}: {e}\n")
+
+    print("¡Limpieza de todas las tablas completada! Los datos están listos para tu modelo en Power BI.")
+
+if __name__ == '__main__':
+    limpiar_y_procesar_todo()

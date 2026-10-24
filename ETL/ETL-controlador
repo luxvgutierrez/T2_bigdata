@@ -1,0 +1,69 @@
+import os
+import pandas as pd
+from sqlalchemy import create_engine
+import urllib
+from datetime import datetime
+
+# 1. Configuración de SQL Server
+server = 'MONITOR'
+database = 'proyecto_dw'
+driver = 'ODBC Driver 17 for SQL Server'
+params = urllib.parse.quote_plus(f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;')
+engine = create_engine(f'mssql+pyodbc:///?odbc_connect={params}')
+
+# Lista de tablas del modelo dimensional
+tablas = [
+    'Fact_Ventas', 'Fact_Compras', 'Fact_Inventario_Snapshot',
+    'Dim_Producto', 'Dim_Cliente', 'Dim_Proveedor', 'Dim_Trabajador', 'Dim_Tiempo'
+]
+
+def ejecutar_etl_maestro():
+    print(f"[{datetime.now()}] Iniciando ejecución automatizada del ETL...")
+    
+    carpeta_raw = './raw'
+    carpeta_processed = './processed'
+    
+    # Crear carpetas si no existen
+    if not os.path.exists(carpeta_raw): os.makedirs(carpeta_raw)
+    if not os.path.exists(carpeta_processed): os.makedirs(carpeta_processed)
+
+    for tabla in tablas:
+        print(f"\n--- Procesando tabla: {tabla} ---")
+        try:
+            # ==========================================
+            # FASE 1: INGESTA (SQL Server -> Data Lake Raw)
+            # ==========================================
+            print("1. Extrayendo de SQL Server...")
+            df = pd.read_sql(f"SELECT * FROM {tabla}", con=engine)
+            ruta_raw = f'{carpeta_raw}/{tabla}.csv'
+            df.to_csv(ruta_raw, index=False, encoding='utf-8')
+            
+            # ==========================================
+            # FASE 2: LIMPIEZA (Data Lake Raw -> Processed)
+            # ==========================================
+            print("2. Aplicando limpieza y reglas de calidad...")
+            df_limpio = df.drop_duplicates() # RNF03: Eliminar duplicados
+            
+            # Reglas específicas
+            if tabla == 'Fact_Ventas':
+                df_limpio = df_limpio[(df_limpio['cantidad'] > 0) & (df_limpio['importe_total'] >= 0)]
+                df_limpio = df_limpio.dropna(subset=['sk_cliente', 'sk_producto', 'sk_tiempo', 'sk_trabajador'])
+            elif tabla == 'Fact_Compras':
+                df_limpio = df_limpio[(df_limpio['cantidad'] > 0) & (df_limpio['precio_unitario'] >= 0)]
+                df_limpio = df_limpio.dropna(subset=['sk_proveedor', 'sk_producto', 'sk_tiempo', 'sk_trabajador'])
+            elif tabla == 'Fact_Inventario_Snapshot':
+                df_limpio = df_limpio[df_limpio['stock_cantidad'] >= 0]
+                df_limpio = df_limpio.dropna(subset=['sk_producto', 'sk_tiempo'])
+            
+            # Guardar en la capa procesada
+            ruta_proc = f'{carpeta_processed}/{tabla}_Limpio.csv'
+            df_limpio.to_csv(ruta_proc, index=False, encoding='utf-8')
+            print(f"3. Archivo listo para Power BI: {ruta_proc}")
+            
+        except Exception as e:
+            print(f"Error procesando {tabla}: {e}")
+
+    print(f"\n[{datetime.now()}] ETL Finalizado. Los datos están actualizados para los dashboards.")
+
+if __name__ == '__main__':
+    ejecutar_etl_maestro()

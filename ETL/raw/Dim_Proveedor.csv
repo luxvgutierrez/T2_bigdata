@@ -1,0 +1,21 @@
+sk_proveedor,id_provedor,nombre_proveedor,cod_tipo_provedor,tipo_proveedor,limite_credito,plazo_pago_dias,tipo_pago,estado_credito,tiene_delivery,telefono,fecha_inicio,fecha_fin,es_vigente
+1,000001,Distribuidora San Jorge,TP1   ,Abarrotes y granos,7500.0,7,Crédito 7 días,Aprobado,True,01-640-1001,2024-01-01,,True
+2,000002,Comercializadora Santa Rosa,TP2   ,Abarrotes,10000.0,15,Crédito 15 días,Aprobado,True,01-640-1002,2024-01-01,,True
+3,000003,Lácteos del Valle,TP3   ,Lácteos y refrigerados,12500.0,30,Crédito 30 días,Aprobado,True,01-640-1003,2024-01-01,,True
+4,000004,Bebidas Lima Norte,TP4   ,Bebidas,15000.0,0,Contado,Aprobado,False,01-640-1004,2024-01-01,,True
+5,000005,Alicorp Distribuciones,TP5   ,"Aceites, pastas y salsas",5000.0,7,Crédito 7 días,En evaluación,True,01-640-1005,2024-01-01,,True
+6,000006,Distribuidora Don Pepe,TP6   ,Galletas y snacks,7500.0,15,Crédito 15 días,Aprobado,True,01-640-1006,2024-01-01,,True
+7,000007,Mercado Mayorista Unicachi,TP7   ,Frutas y verduras,10000.0,30,Crédito 30 días,Aprobado,True,01-640-1007,2024-01-01,,True
+8,000008,Avícola Los Olivos,TP8   ,Huevos y pollo,12500.0,0,Contado,Aprobado,False,01-640-1008,2024-01-01,,True
+9,000009,Limpieza Total Perú,TP1   ,Limpieza del hogar,15000.0,7,Crédito 7 días,Aprobado,True,01-640-1009,2024-01-01,,True
+10,000010,Higiene y Hogar SAC,TP2   ,Cuidado personal,5000.0,15,Crédito 15 días,En evaluación,True,01-640-1010,2024-01-01,,True
+11,000011,Panificadora San Martín,TP3   ,Panadería,7500.0,30,Crédito 30 días,Aprobado,True,01-640-1011,2024-01-01,,True
+12,000012,Dulces del Perú,TP4   ,Golosinas y chocolates,10000.0,0,Contado,Aprobado,False,01-640-1012,2024-01-01,,True
+13,000013,Mascotas Felices,TP5   ,Alimentos para mascotas,12500.0,7,Crédito 7 días,Aprobado,True,01-640-1013,2024-01-01,,True
+14,000014,Comercial El Ahorro,TP6   ,Abarrotes generales,15000.0,15,Crédito 15 días,Aprobado,True,01-640-1014,2024-01-01,,True
+15,000015,Importadora Buen Precio,TP7   ,Conservas y enlatados,5000.0,30,Crédito 30 días,En evaluación,True,01-640-1015,2024-01-01,,True
+16,000016,Distribuciones La Canasta,TP8   ,Frutas y verduras,7500.0,0,Contado,Aprobado,False,01-640-1016,2024-01-01,,True
+17,000017,Agua Pura Norte,TP1   ,Agua y refrescos,10000.0,7,Crédito 7 días,Aprobado,True,01-640-1017,2024-01-01,,True
+18,000018,Mayorista Central,TP2   ,Abarrotes y bebidas,12500.0,15,Crédito 15 días,Aprobado,True,01-640-1018,2024-01-01,,True
+19,000019,Productos Andinos SAC,TP3   ,Menestras y cereales,15000.0,30,Crédito 30 días,Aprobado,True,01-640-1019,2024-01-01,,True
+20,000020,Distribuidora Primavera,TP4   ,Lácteos y postres,5000.0,0,Contado,En evaluación,False,01-640-1020,2024-01-01,,True
