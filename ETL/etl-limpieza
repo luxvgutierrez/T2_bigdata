@@ -14,6 +14,7 @@ from auditoria import Auditoria
 from reglas_limpieza import procesar_tabla
 from utilidades import (
     guardar_cuarentena,
+    leer_csv_contrato,
     ruta_procesado,
     ruta_raw,
     escribir_csv_atomico,
@@ -38,7 +39,7 @@ def limpiar_y_auditar(auditoria: Auditoria) -> None:
 
         try:
             with auditoria.cronometrar('LIMPIEZA', tabla) as crono:
-                df = pd.read_csv(ruta_entrada)
+                df = leer_csv_contrato(ruta_entrada)
                 resultado = procesar_tabla(df, tabla, dims=dims_limpias or None)
                 crono.detalle = resultado['metricas']
 

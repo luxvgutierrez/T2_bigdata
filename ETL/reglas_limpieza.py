@@ -86,6 +86,12 @@ def limpiar_tabla(df: pd.DataFrame, tabla: str):
     """
     df = df.copy()
 
+    # Normalización de texto: el SQL Server devuelve los CHAR con relleno de
+    # espacios ('000001   '). Se recortan para que el lake no arrastre ruido.
+    for col in df.columns:
+        if df[col].dtype == object or pd.api.types.is_string_dtype(df[col]):
+            df[col] = df[col].astype('string').str.strip()
+
     # --- Coerción de tipos: texto no numérico -> NaN (y salta la regla de nulos) ---
     for col in CAMPOS_NUMERICOS.get(tabla, []):
         if col in df.columns and not pd.api.types.is_numeric_dtype(df[col]):

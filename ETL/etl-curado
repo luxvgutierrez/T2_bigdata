@@ -1,0 +1,60 @@
+"""
+FASE 3: Curaduría (capa gold).
+Toma la capa limpia (silver, processed/) y publica la capa gold:
+  - curated/tablas/<Tabla>/anio_mes=YYYY-MM/*.parquet   (columnar, particionado)
+  - curated/para_powerbi/<Tabla>.csv                    (plano, tipado, para Power BI)
+"""
+import os
+import sys
+
+import pandas as pd
+
+import config
+from auditoria import Auditoria
+from curacion import construir_capa_gold
+from utilidades import leer_csv_contrato, ruta_procesado
+
+
+def ejecutar() -> int:
+    auditoria = Auditoria(config.CARPETA_AUDITORIA)
+    os.makedirs(config.CARPETA_GOLD_PARQUET, exist_ok=True)
+    os.makedirs(config.CARPETA_GOLD_POWERBI, exist_ok=True)
+
+    datos = {}
+    for tabla in config.TABLAS:
+        ruta = ruta_procesado(tabla)
+        if not os.path.exists(ruta):
+            auditoria.registrar_simple(
+                'CURACION', tabla, f'No existe {ruta}: la tabla no se publica en gold'
+            )
+            continue
+        try:
+            with auditoria.cronometrar('CARGA_SILVER', tabla) as crono:
+                df = leer_csv_contrato(ruta)
+                crono.detalle = {'filas_leidas': len(df)}
+            datos[tabla] = df
+        except Exception:
+            continue  # el error ya quedó registrado en la auditoría
+
+    try:
+        with auditoria.cronometrar('CURACION') as crono:
+            resultados = construir_capa_gold(datos)
+            crono.detalle = {
+                'filas_salida': sum(r['filas'] for r in resultados.values()),
+                'mensaje': f'{len(resultados)} tablas publicadas en la capa gold',
+            }
+            for tabla, info in resultados.items():
+                auditoria.registrar_simple(
+                    'SISTEMA', tabla,
+                    f"Gold: {info['filas']} filas x {info['columnas']} columnas "
+                    f"({'particionado' if info['particionado'] else 'sin particionar'})",
+                )
+    except Exception:
+        pass  # error ya registrado por la auditoría
+
+    resumen = auditoria.finalizar()
+    return 1 if resumen['estado_global'] == 'CON_ERRORES' else 0
+
+
+if __name__ == '__main__':
+    sys.exit(ejecutar())

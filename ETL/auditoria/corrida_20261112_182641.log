@@ -1,0 +1,22 @@
+[2026-11-12 18:26:41] === INICIO DE CORRIDA 20261112_182641 ===
+[2026-11-12 18:26:41] [CARGA_SILVER/Dim_Producto] OK en 0.012 s | filas_leidas=80
+[2026-11-12 18:26:41] [CARGA_SILVER/Dim_Cliente] OK en 0.008 s | filas_leidas=300
+[2026-11-12 18:26:41] [CARGA_SILVER/Dim_Proveedor] OK en 0.005 s | filas_leidas=20
+[2026-11-12 18:26:41] [CARGA_SILVER/Dim_Trabajador] OK en 0.005 s | filas_leidas=20
+[2026-11-12 18:26:41] [CURACION/Dim_Condicion_Venta] INFO | No existe C:\Users\admin\Desktop\hvy\T2_bigdata\ETL\processed\Dim_Condicion_Venta_Limpio.csv: la tabla no se publica en gold
+[2026-11-12 18:26:41] [CURACION/Dim_Documento_Ingreso] INFO | No existe C:\Users\admin\Desktop\hvy\T2_bigdata\ETL\processed\Dim_Documento_Ingreso_Limpio.csv: la tabla no se publica en gold
+[2026-11-12 18:26:41] [CARGA_SILVER/Dim_Tiempo] OK en 0.009 s | filas_leidas=638
+[2026-11-12 18:26:41] [CURACION/Bridge_Abastecimiento] INFO | No existe C:\Users\admin\Desktop\hvy\T2_bigdata\ETL\processed\Bridge_Abastecimiento_Limpio.csv: la tabla no se publica en gold
+[2026-11-12 18:26:41] [CARGA_SILVER/Fact_Ventas] OK en 0.033 s | filas_leidas=5000
+[2026-11-12 18:26:41] [CARGA_SILVER/Fact_Compras] OK en 0.012 s | filas_leidas=1500
+[2026-11-12 18:26:41] [CARGA_SILVER/Fact_Inventario_Snapshot] OK en 0.087 s | filas_leidas=51040
+[2026-11-12 18:26:41] [SISTEMA/Dim_Producto] INFO | Gold: 80 filas x 10 columnas (sin particionar)
+[2026-11-12 18:26:41] [SISTEMA/Dim_Cliente] INFO | Gold: 300 filas x 13 columnas (sin particionar)
+[2026-11-12 18:26:41] [SISTEMA/Dim_Proveedor] INFO | Gold: 20 filas x 14 columnas (sin particionar)
+[2026-11-12 18:26:41] [SISTEMA/Dim_Trabajador] INFO | Gold: 20 filas x 11 columnas (sin particionar)
+[2026-11-12 18:26:41] [SISTEMA/Dim_Tiempo] INFO | Gold: 638 filas x 10 columnas (sin particionar)
+[2026-11-12 18:26:41] [SISTEMA/Fact_Ventas] INFO | Gold: 5000 filas x 13 columnas (particionado)
+[2026-11-12 18:26:41] [SISTEMA/Fact_Compras] INFO | Gold: 1500 filas x 14 columnas (particionado)
+[2026-11-12 18:26:41] [SISTEMA/Fact_Inventario_Snapshot] INFO | Gold: 51040 filas x 5 columnas (particionado)
+[2026-11-12 18:26:41] [CURACION] OK en 0.346 s | filas_salida=58598
+[2026-11-12 18:26:41] === FIN DE CORRIDA 20261112_182641 | duración total: 0.526 s | estado: EXITOSO ===

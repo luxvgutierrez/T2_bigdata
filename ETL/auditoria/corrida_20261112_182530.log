@@ -1,0 +1,32 @@
+[2026-11-12 18:25:30] === INICIO DE CORRIDA 20261112_182530 ===
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Producto] OK en 0.016 s | filas_leidas=80 | filas_descartadas=0 | filas_salida=80
+[2026-11-12 18:25:30] [CUARENTENA/Dim_Producto] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [SISTEMA/Dim_Producto] INFO | Guardado: Dim_Producto_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Cliente] OK en 0.009 s | filas_leidas=300 | filas_descartadas=0 | filas_salida=300
+[2026-11-12 18:25:30] [CUARENTENA/Dim_Cliente] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [SISTEMA/Dim_Cliente] INFO | Guardado: Dim_Cliente_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Proveedor] OK en 0.01 s | filas_leidas=20 | filas_descartadas=0 | filas_salida=20
+[2026-11-12 18:25:30] [CUARENTENA/Dim_Proveedor] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [SISTEMA/Dim_Proveedor] INFO | Guardado: Dim_Proveedor_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Trabajador] OK en 0.009 s | filas_leidas=20 | filas_descartadas=0 | filas_salida=20
+[2026-11-12 18:25:30] [CUARENTENA/Dim_Trabajador] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [SISTEMA/Dim_Trabajador] INFO | Guardado: Dim_Trabajador_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Condicion_Venta] INFO | No existe el archivo crudo C:\Users\admin\Desktop\hvy\T2_bigdata\ETL\raw\Dim_Condicion_Venta.csv: saltando la tabla
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Documento_Ingreso] INFO | No existe el archivo crudo C:\Users\admin\Desktop\hvy\T2_bigdata\ETL\raw\Dim_Documento_Ingreso.csv: saltando la tabla
+[2026-11-12 18:25:30] [LIMPIEZA/Dim_Tiempo] OK en 0.009 s | filas_leidas=638 | filas_descartadas=0 | filas_salida=638
+[2026-11-12 18:25:30] [CUARENTENA/Dim_Tiempo] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [SISTEMA/Dim_Tiempo] INFO | Guardado: Dim_Tiempo_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Bridge_Abastecimiento] INFO | No existe el archivo crudo C:\Users\admin\Desktop\hvy\T2_bigdata\ETL\raw\Bridge_Abastecimiento.csv: saltando la tabla
+[2026-11-12 18:25:30] [LIMPIEZA/Fact_Ventas] OK en 0.016 s | filas_leidas=5000 | filas_descartadas=0 | filas_salida=5000
+[2026-11-12 18:25:30] [CUARENTENA/Fact_Ventas] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [VALIDACION_REFERENCIAL/Fact_Ventas] OK en 0.0 s | huerfanos=0
+[2026-11-12 18:25:30] [SISTEMA/Fact_Ventas] INFO | Guardado: Fact_Ventas_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Fact_Compras] OK en 0.012 s | filas_leidas=1500 | filas_descartadas=0 | filas_salida=1500
+[2026-11-12 18:25:30] [CUARENTENA/Fact_Compras] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [VALIDACION_REFERENCIAL/Fact_Compras] OK en 0.0 s | huerfanos=0
+[2026-11-12 18:25:30] [SISTEMA/Fact_Compras] INFO | Guardado: Fact_Compras_Limpio.csv
+[2026-11-12 18:25:30] [LIMPIEZA/Fact_Inventario_Snapshot] OK en 0.033 s | filas_leidas=51040 | filas_descartadas=0 | filas_salida=51040
+[2026-11-12 18:25:30] [CUARENTENA/Fact_Inventario_Snapshot] OK en 0.0 s | filas_descartadas=0
+[2026-11-12 18:25:30] [VALIDACION_REFERENCIAL/Fact_Inventario_Snapshot] OK en 0.0 s | huerfanos=0
+[2026-11-12 18:25:30] [SISTEMA/Fact_Inventario_Snapshot] INFO | Guardado: Fact_Inventario_Snapshot_Limpio.csv
+[2026-11-12 18:25:30] === FIN DE CORRIDA 20261112_182530 | duración total: 0.212 s | estado: EXITOSO ===

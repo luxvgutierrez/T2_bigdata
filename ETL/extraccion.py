@@ -3,10 +3,12 @@ Fase de ingesta: SQL Server -> capa raw (CSV).
 Usada por `etl-extract` y `ETL-controlador`.
 """
 import time
+from datetime import datetime
 
 import pandas as pd
 from sqlalchemy import text
 
+import config
 from config import TABLAS
 
 
@@ -59,7 +61,16 @@ def extraer_tabla(engine, tabla: str, auditoria=None,
             # Contexto de conexión explícito: evita el warning de
             # deprecación de pandas 2.x con un engine directo.
             with engine.connect() as conexion:
-                return pd.read_sql(sql, con=conexion)
+                df = pd.read_sql(sql, con=conexion)
+            # Trazabilidad de la ingesta (capa bronze)
+            if config.AGREGAR_METADATOS_CARGA:
+                df['id_lote'] = (
+                    auditoria.id_corrida if auditoria is not None
+                    else datetime.now().strftime('%Y%m%d_%H%M%S')
+                )
+                df['fecha_carga'] = pd.Timestamp.now()
+                df['tabla_origen'] = tabla
+            return df
         except Exception as exc:
             ultimo_error = exc
             if intento < reintentos:

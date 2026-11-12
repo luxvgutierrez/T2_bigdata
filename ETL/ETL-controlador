@@ -9,6 +9,7 @@ import sys
 
 import config
 from auditoria import Auditoria
+from curacion import construir_capa_gold
 from extraccion import conteo_bd, extraer_tabla, probar_conexion
 from reglas_limpieza import procesar_tabla
 from utilidades import (
@@ -38,6 +39,7 @@ def ejecutar() -> int:
     os.makedirs(config.CARPETA_PROCESSED, exist_ok=True)
 
     dims_limpias = {}
+    datos_gold = {}
 
     # Dimensiones primero, luego hechos (para la validación referencial)
     for tabla in config.TABLAS:
@@ -69,6 +71,7 @@ def ejecutar() -> int:
                 }
 
             escribir_csv_atomico(resultado['limpio'], ruta_procesado(tabla))
+            datos_gold[tabla] = resultado['limpio']
             if tabla in config.TABLAS_DIMENSIONES:
                 dims_limpias[tabla] = resultado['limpio']
 
@@ -88,6 +91,26 @@ def ejecutar() -> int:
             )
         except Exception:
             continue  # el fallo quedó registrado; la corrida continúa con las demás tablas
+
+    # ------------------------------------------------------------------ #
+    # FASE 3: CURADURÍA (silver -> gold)
+    # ------------------------------------------------------------------ #
+    if datos_gold:
+        try:
+            with auditoria.cronometrar('CURACION') as crono:
+                resultados_gold = construir_capa_gold(datos_gold)
+                crono.detalle = {
+                    'filas_salida': sum(r['filas'] for r in resultados_gold.values()),
+                    'mensaje': f"{len(resultados_gold)} tablas publicadas en la capa gold",
+                }
+                for tabla, info in resultados_gold.items():
+                    auditoria.registrar_simple(
+                        'SISTEMA', tabla,
+                        f"Gold: {info['filas']} filas x {info['columnas']} columnas "
+                        f"({'particionado' if info['particionado'] else 'sin particionar'})",
+                    )
+        except Exception:
+            pass  # el error ya quedó registrado por la auditoría
 
     resumen = auditoria.finalizar()
     return 1 if resumen['estado_global'] == 'CON_ERRORES' else 0

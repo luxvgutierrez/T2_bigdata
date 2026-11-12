@@ -7,11 +7,20 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Capas de la arquitectura
+# Capas de la arquitectura (medallion: bronze -> silver -> gold)
 CARPETA_RAW = os.path.join(BASE_DIR, 'raw')
 CARPETA_PROCESSED = os.path.join(BASE_DIR, 'processed')
 CARPETA_RECHAZADOS = os.path.join(BASE_DIR, 'processed', 'rechazados')
+CARPETA_CURATED = os.path.join(BASE_DIR, 'curated')
+CARPETA_GOLD_PARQUET = os.path.join(CARPETA_CURATED, 'tablas')
+CARPETA_GOLD_POWERBI = os.path.join(CARPETA_CURATED, 'para_powerbi')
 CARPETA_AUDITORIA = os.path.join(BASE_DIR, 'auditoria')
+
+# Formato de la capa gold: 'parquet' (columnar, particionado) + CSV plano para Power BI
+FORMATO_GOLD = 'parquet'
+PARTICIONAR_POR_MES = True
+# Columnas de trazabilidad agregadas en la capa bronze (id_lote, fecha_carga, tabla_origen)
+AGREGAR_METADATOS_CARGA = True
 
 # Conexión a SQL Server (mover credenciales a un .env si cambia de servidor)
 SERVER = 'MONITOR'

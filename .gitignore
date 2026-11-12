@@ -1,0 +1,15 @@
+# Cache y compilados de Python
+__pycache__/
+*.pyc
+*.pyd
+
+# Temporales de la ETL (escritura atómica)
+*.tmp
+
+# Capa gold: es GENERADA por la ETL (curacion.py).
+# Se regenera con: python ETL\etl-curado
+ETL/curated/
+
+# Sistema operativo
+Thumbs.db
+.DS_Store

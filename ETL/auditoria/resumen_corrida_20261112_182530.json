@@ -1,0 +1,287 @@
+{
+  "id_corrida": "20261112_182530",
+  "corpus": "ETL BigData T2",
+  "inicio": "2026-11-12T18:25:30",
+  "fin": "2026-11-12T18:25:30",
+  "duracion_total_seg": 0.212,
+  "estado_global": "EXITOSO",
+  "eventos_ok": 19,
+  "eventos_error": 0,
+  "fases": [
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Producto",
+      "estado": "OK",
+      "duracion_seg": 0.016,
+      "filas_leidas": 80,
+      "filas_descartadas": 0,
+      "filas_salida": 80,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Dim_Producto",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Producto",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Dim_Producto_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Cliente",
+      "estado": "OK",
+      "duracion_seg": 0.009,
+      "filas_leidas": 300,
+      "filas_descartadas": 0,
+      "filas_salida": 300,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Dim_Cliente",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Cliente",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Dim_Cliente_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Proveedor",
+      "estado": "OK",
+      "duracion_seg": 0.01,
+      "filas_leidas": 20,
+      "filas_descartadas": 0,
+      "filas_salida": 20,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Dim_Proveedor",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Proveedor",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Dim_Proveedor_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Trabajador",
+      "estado": "OK",
+      "duracion_seg": 0.009,
+      "filas_leidas": 20,
+      "filas_descartadas": 0,
+      "filas_salida": 20,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Dim_Trabajador",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Trabajador",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Dim_Trabajador_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Condicion_Venta",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "No existe el archivo crudo C:\\Users\\admin\\Desktop\\hvy\\T2_bigdata\\ETL\\raw\\Dim_Condicion_Venta.csv: saltando la tabla"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Documento_Ingreso",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "No existe el archivo crudo C:\\Users\\admin\\Desktop\\hvy\\T2_bigdata\\ETL\\raw\\Dim_Documento_Ingreso.csv: saltando la tabla"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Dim_Tiempo",
+      "estado": "OK",
+      "duracion_seg": 0.009,
+      "filas_leidas": 638,
+      "filas_descartadas": 0,
+      "filas_salida": 638,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Dim_Tiempo",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Tiempo",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Dim_Tiempo_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Bridge_Abastecimiento",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "No existe el archivo crudo C:\\Users\\admin\\Desktop\\hvy\\T2_bigdata\\ETL\\raw\\Bridge_Abastecimiento.csv: saltando la tabla"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Fact_Ventas",
+      "estado": "OK",
+      "duracion_seg": 0.016,
+      "filas_leidas": 5000,
+      "filas_descartadas": 0,
+      "filas_salida": 5000,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Fact_Ventas",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "VALIDACION_REFERENCIAL",
+      "tabla": "Fact_Ventas",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "huerfanos": 0,
+      "mensaje": "Sin huérfanos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Fact_Ventas",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Fact_Ventas_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Fact_Compras",
+      "estado": "OK",
+      "duracion_seg": 0.012,
+      "filas_leidas": 1500,
+      "filas_descartadas": 0,
+      "filas_salida": 1500,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Fact_Compras",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "VALIDACION_REFERENCIAL",
+      "tabla": "Fact_Compras",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "huerfanos": 0,
+      "mensaje": "Sin huérfanos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Fact_Compras",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Fact_Compras_Limpio.csv"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "LIMPIEZA",
+      "tabla": "Fact_Inventario_Snapshot",
+      "estado": "OK",
+      "duracion_seg": 0.033,
+      "filas_leidas": 51040,
+      "filas_descartadas": 0,
+      "filas_salida": 51040,
+      "desglose_rechazos": {}
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "CUARENTENA",
+      "tabla": "Fact_Inventario_Snapshot",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "filas_descartadas": 0,
+      "mensaje": "Sin rechazos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "VALIDACION_REFERENCIAL",
+      "tabla": "Fact_Inventario_Snapshot",
+      "estado": "OK",
+      "duracion_seg": 0.0,
+      "huerfanos": 0,
+      "mensaje": "Sin huérfanos"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:30",
+      "etapa": "SISTEMA",
+      "tabla": "Fact_Inventario_Snapshot",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Guardado: Fact_Inventario_Snapshot_Limpio.csv"
+    }
+  ]
+}

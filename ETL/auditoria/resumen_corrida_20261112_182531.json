@@ -1,0 +1,173 @@
+{
+  "id_corrida": "20261112_182531",
+  "corpus": "ETL BigData T2",
+  "inicio": "2026-11-12T18:25:31",
+  "fin": "2026-11-12T18:25:45",
+  "duracion_total_seg": 14.776,
+  "estado_global": "EXITOSO",
+  "eventos_ok": 9,
+  "eventos_error": 0,
+  "fases": [
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Dim_Producto",
+      "estado": "OK",
+      "duracion_seg": 0.006,
+      "filas_leidas": 80
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Dim_Cliente",
+      "estado": "OK",
+      "duracion_seg": 0.002,
+      "filas_leidas": 300
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Dim_Proveedor",
+      "estado": "OK",
+      "duracion_seg": 0.001,
+      "filas_leidas": 20
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Dim_Trabajador",
+      "estado": "OK",
+      "duracion_seg": 0.002,
+      "filas_leidas": 20
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CURACION",
+      "tabla": "Dim_Condicion_Venta",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "No existe C:\\Users\\admin\\Desktop\\hvy\\T2_bigdata\\ETL\\processed\\Dim_Condicion_Venta_Limpio.csv: la tabla no se publica en gold"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CURACION",
+      "tabla": "Dim_Documento_Ingreso",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "No existe C:\\Users\\admin\\Desktop\\hvy\\T2_bigdata\\ETL\\processed\\Dim_Documento_Ingreso_Limpio.csv: la tabla no se publica en gold"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Dim_Tiempo",
+      "estado": "OK",
+      "duracion_seg": 0.001,
+      "filas_leidas": 638
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CURACION",
+      "tabla": "Bridge_Abastecimiento",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "No existe C:\\Users\\admin\\Desktop\\hvy\\T2_bigdata\\ETL\\processed\\Bridge_Abastecimiento_Limpio.csv: la tabla no se publica en gold"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Fact_Ventas",
+      "estado": "OK",
+      "duracion_seg": 0.002,
+      "filas_leidas": 5000
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Fact_Compras",
+      "estado": "OK",
+      "duracion_seg": 0.002,
+      "filas_leidas": 1500
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:31",
+      "etapa": "CARGA_SILVER",
+      "tabla": "Fact_Inventario_Snapshot",
+      "estado": "OK",
+      "duracion_seg": 0.005,
+      "filas_leidas": 51040
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Producto",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 80 filas x 10 columnas (sin particionar)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Cliente",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 300 filas x 13 columnas (sin particionar)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Proveedor",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 20 filas x 14 columnas (sin particionar)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Trabajador",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 20 filas x 11 columnas (sin particionar)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Dim_Tiempo",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 638 filas x 10 columnas (sin particionar)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Fact_Ventas",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 5000 filas x 13 columnas (particionado)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Fact_Compras",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 1500 filas x 14 columnas (particionado)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "SISTEMA",
+      "tabla": "Fact_Inventario_Snapshot",
+      "estado": "INFO",
+      "duracion_seg": null,
+      "mensaje": "Gold: 51040 filas x 5 columnas (particionado)"
+    },
+    {
+      "fecha_hora": "2026-11-12T18:25:45",
+      "etapa": "CURACION",
+      "tabla": "",
+      "estado": "OK",
+      "duracion_seg": 14.748,
+      "filas_salida": 58598,
+      "mensaje": "8 tablas publicadas en la capa gold"
+    }
+  ]
+}
