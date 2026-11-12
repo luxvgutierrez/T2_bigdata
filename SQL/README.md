@@ -10,6 +10,9 @@ T2_bigdata/
 ├── sp_carga_scd2.sql             # Procedimientos SCD-2 (cierra vigente + inserta nueva versión)
 ├── vw_comparativo_conteos.sql    # Vista de conteos: la ETL la usa para verificar la ingesta
 ├── auditoria_bd.sql              # Tablas de auditoría + vista de calidad + triggers SCD-2
+├── esquema_estrella.md           # Documento del modelo en estrella (grano, medidas, reglas)
+├── esquema_estrella_mejoras.sql  # Índices faltantes, regla R4 (coherencia temporal SCD), CHECKs
+├── evaluar_calidad.sql           # Consultas de evaluación de la auditoría
 ├── ETL/                          # Pipeline de datos (Python)
 │   ├── config.py                 # Conexión SQL Server + rutas + listado de tablas
 │   ├── utilidades.py             # Escritura atómica, rutas raw/processed/cuarentena
