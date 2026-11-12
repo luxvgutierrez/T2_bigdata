@@ -1,69 +1,97 @@
+"""
+ORQUESTADOR (pipeline completo en una sola corrida):
+Fase 1: Ingesta  (SQL Server -> raw)
+Fase 2: Limpieza (raw -> processed, RNF03 + integridad referencial)
+Fase 3: Auditoría (tiempos de respuesta, filas, cuarentena, histórico)
+"""
 import os
-import pandas as pd
-from sqlalchemy import create_engine
-import urllib
-from datetime import datetime
+import sys
 
-# 1. Configuración de SQL Server
-server = 'MONITOR'
-database = 'proyecto_dw'
-driver = 'ODBC Driver 17 for SQL Server'
-params = urllib.parse.quote_plus(f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;')
-engine = create_engine(f'mssql+pyodbc:///?odbc_connect={params}')
+import config
+from auditoria import Auditoria
+from extraccion import conteo_bd, extraer_tabla, probar_conexion
+from reglas_limpieza import procesar_tabla
+from utilidades import (
+    escribir_csv_atomico,
+    guardar_cuarentena,
+    ruta_procesado,
+    ruta_raw,
+)
 
-# Lista de tablas del modelo dimensional
-tablas = [
-    'Fact_Ventas', 'Fact_Compras', 'Fact_Inventario_Snapshot',
-    'Dim_Producto', 'Dim_Cliente', 'Dim_Proveedor', 'Dim_Trabajador', 'Dim_Tiempo'
-]
 
-def ejecutar_etl_maestro():
-    print(f"[{datetime.now()}] Iniciando ejecución automatizada del ETL...")
-    
-    carpeta_raw = './raw'
-    carpeta_processed = './processed'
-    
-    # Crear carpetas si no existen
-    if not os.path.exists(carpeta_raw): os.makedirs(carpeta_raw)
-    if not os.path.exists(carpeta_processed): os.makedirs(carpeta_processed)
+def ejecutar() -> int:
+    auditoria = Auditoria(config.CARPETA_AUDITORIA)
 
-    for tabla in tablas:
-        print(f"\n--- Procesando tabla: {tabla} ---")
+    # ------------------------------------------------------------------ #
+    # Conexión
+    # ------------------------------------------------------------------ #
+    try:
+        with auditoria.cronometrar('CONEXION') as crono:
+            engine = config.crear_engine()
+            probar_conexion(engine)
+            crono.mensaje = f'Servidor: {config.SERVER} / BD: {config.DATABASE}'
+    except Exception:
+        auditoria.finalizar()
+        return 1
+
+    os.makedirs(config.CARPETA_RAW, exist_ok=True)
+    os.makedirs(config.CARPETA_PROCESSED, exist_ok=True)
+
+    dims_limpias = {}
+
+    # Dimensiones primero, luego hechos (para la validación referencial)
+    for tabla in config.TABLAS:
         try:
-            # ==========================================
-            # FASE 1: INGESTA (SQL Server -> Data Lake Raw)
-            # ==========================================
-            print("1. Extrayendo de SQL Server...")
-            df = pd.read_sql(f"SELECT * FROM {tabla}", con=engine)
-            ruta_raw = f'{carpeta_raw}/{tabla}.csv'
-            df.to_csv(ruta_raw, index=False, encoding='utf-8')
-            
-            # ==========================================
-            # FASE 2: LIMPIEZA (Data Lake Raw -> Processed)
-            # ==========================================
-            print("2. Aplicando limpieza y reglas de calidad...")
-            df_limpio = df.drop_duplicates() # RNF03: Eliminar duplicados
-            
-            # Reglas específicas
-            if tabla == 'Fact_Ventas':
-                df_limpio = df_limpio[(df_limpio['cantidad'] > 0) & (df_limpio['importe_total'] >= 0)]
-                df_limpio = df_limpio.dropna(subset=['sk_cliente', 'sk_producto', 'sk_tiempo', 'sk_trabajador'])
-            elif tabla == 'Fact_Compras':
-                df_limpio = df_limpio[(df_limpio['cantidad'] > 0) & (df_limpio['precio_unitario'] >= 0)]
-                df_limpio = df_limpio.dropna(subset=['sk_proveedor', 'sk_producto', 'sk_tiempo', 'sk_trabajador'])
-            elif tabla == 'Fact_Inventario_Snapshot':
-                df_limpio = df_limpio[df_limpio['stock_cantidad'] >= 0]
-                df_limpio = df_limpio.dropna(subset=['sk_producto', 'sk_tiempo'])
-            
-            # Guardar en la capa procesada
-            ruta_proc = f'{carpeta_processed}/{tabla}_Limpio.csv'
-            df_limpio.to_csv(ruta_proc, index=False, encoding='utf-8')
-            print(f"3. Archivo listo para Power BI: {ruta_proc}")
-            
-        except Exception as e:
-            print(f"Error procesando {tabla}: {e}")
+            # ---------- FASE 1: INGESTA ----------
+            with auditoria.cronometrar('EXTRACCION', tabla) as crono:
+                df = extraer_tabla(engine, tabla, auditoria=auditoria)
+                # Verificación de ingesta: filas extraídas == filas en la BD
+                conteo = conteo_bd(engine, tabla)
+                if conteo != len(df):
+                    raise RuntimeError(
+                        f'Extracción incompleta: BD tiene {conteo} filas, '
+                        f'se extrajeron {len(df)}'
+                    )
+                escribir_csv_atomico(df, ruta_raw(tabla))
+                crono.detalle = {'conteo_bd': conteo, 'filas_leidas': len(df)}
 
-    print(f"\n[{datetime.now()}] ETL Finalizado. Los datos están actualizados para los dashboards.")
+            # ---------- FASE 2: LIMPIEZA ----------
+            with auditoria.cronometrar('LIMPIEZA', tabla) as crono:
+                resultado = procesar_tabla(df, tabla, dims=dims_limpias or None)
+                crono.detalle = resultado['metricas']
+
+            # ---------- Cuarentena de rechazos por reglas ----------
+            with auditoria.cronometrar('CUARENTENA', tabla) as crono:
+                ruta_q = guardar_cuarentena(resultado['rechazados'], tabla)
+                crono.detalle = {
+                    'filas_descartadas': len(resultado['rechazados']),
+                    'mensaje': f'Rechazados en cuarentena: {ruta_q}' if ruta_q else 'Sin rechazos',
+                }
+
+            escribir_csv_atomico(resultado['limpio'], ruta_procesado(tabla))
+            if tabla in config.TABLAS_DIMENSIONES:
+                dims_limpias[tabla] = resultado['limpio']
+
+            # ---------- Validación referencial ----------
+            if tabla in config.TABLAS_CON_REFERENCIAL:
+                n_huerf = len(resultado['huerfanos']) if resultado['huerfanos'] is not None else 0
+                with auditoria.cronometrar('VALIDACION_REFERENCIAL', tabla) as crono:
+                    ruta_h = guardar_cuarentena(resultado['huerfanos'], tabla, tipo='huerfanas')
+                    crono.detalle = {
+                        'huerfanos': n_huerf,
+                        'mensaje': f'Huérfanos en cuarentena: {ruta_h}' if ruta_h else 'Sin huérfanos',
+                    }
+
+            auditoria.registrar_simple(
+                'SISTEMA', tabla,
+                f'Listo para Power BI: {os.path.basename(ruta_procesado(tabla))}',
+            )
+        except Exception:
+            continue  # el fallo quedó registrado; la corrida continúa con las demás tablas
+
+    resumen = auditoria.finalizar()
+    return 1 if resumen['estado_global'] == 'CON_ERRORES' else 0
+
 
 if __name__ == '__main__':
-    ejecutar_etl_maestro()
+    sys.exit(ejecutar())

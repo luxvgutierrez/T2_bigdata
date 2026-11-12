@@ -1,55 +1,53 @@
-import pandas as pd
-from sqlalchemy import create_engine
-import urllib
+"""
+FASE 1: Ingesta (SQL Server -> Data Lake Raw).
+Extrae las tablas del modelo dimensional a CSV con escritura atómica,
+reintentos y auditoría (tiempos de respuesta, filas, estado).
+"""
 import os
+import sys
 
-# Configuración de conexión
-server = 'MONITOR'
-database = 'proyecto_dw'
-driver = 'ODBC Driver 17 for SQL Server'
-params = urllib.parse.quote_plus(f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;')
-engine = create_engine(f'mssql+pyodbc:///?odbc_connect={params}')
+import config
+from auditoria import Auditoria
+from extraccion import conteo_bd, extraer_tabla, probar_conexion
+from utilidades import escribir_csv_atomico
 
-def extraer_todas_las_tablas():
-    print("Conectando a SQL Server...")
-    
-    # Crear carpeta raw si no existe
-    carpeta_salida = './raw'
-    if not os.path.exists(carpeta_salida):
-        os.makedirs(carpeta_salida)
-        
-    # Lista de todas las tablas que necesitas para tu modelo dimensional
-    tablas_a_extraer = [
-        'Fact_Ventas',
-        'Fact_Compras',
-        'Fact_Inventario_Snapshot',
-        'Dim_Producto',
-        'Dim_Cliente',
-        'Dim_Proveedor',
-        'Dim_Trabajador',
-        'Dim_Tiempo'
-    ]
-    
-    # Bucle para extraer y guardar cada tabla
-    for tabla in tablas_a_extraer:
-        print(f"Extrayendo datos de la tabla: {tabla}...")
-        
-        consulta_sql = f"SELECT * FROM {tabla}"
-        
+
+def main() -> int:
+    auditoria = Auditoria(config.CARPETA_AUDITORIA)
+    engine = None
+
+    try:
+        with auditoria.cronometrar('CONEXION') as crono:
+            engine = config.crear_engine()
+            probar_conexion(engine)
+            crono.mensaje = f'Servidor: {config.SERVER} / BD: {config.DATABASE}'
+    except Exception as exc:
+        auditoria.finalizar()
+        print(f'No se pudo conectar a SQL Server: {exc}')
+        return 1
+
+    for tabla in config.TABLAS:
         try:
-            # Leer datos de la tabla actual
-            df_extraido = pd.read_sql(consulta_sql, con=engine)
-            
-            # Guardar en un CSV con el nombre de la tabla
-            ruta_salida = f'{carpeta_salida}/{tabla}.csv'
-            df_extraido.to_csv(ruta_salida, index=False, encoding='utf-8')
-            
-            print(f" -> Guardado exitoso: {ruta_salida}")
-            
-        except Exception as e:
-            print(f" -> Error al extraer {tabla}: {e}")
+            with auditoria.cronometrar('EXTRACCION', tabla) as crono:
+                df = extraer_tabla(engine, tabla, auditoria=auditoria)
+                # Verificación de ingesta: filas extraídas == filas en la BD
+                conteo = conteo_bd(engine, tabla)
+                if conteo != len(df):
+                    raise RuntimeError(
+                        f'Extracción incompleta: BD tiene {conteo} filas, '
+                        f'se extrajeron {len(df)}'
+                    )
+                crono.detalle = {'conteo_bd': conteo, 'filas_leidas': len(df)}
+                os.makedirs(config.CARPETA_RAW, exist_ok=True)
+                ruta = os.path.join(config.CARPETA_RAW, f'{tabla}.csv')
+                escribir_csv_atomico(df, ruta)
+                crono.detalle['mensaje'] = f'Guardado: {ruta}'
+        except Exception:
+            continue  # el error ya quedó registrado por la auditoría
 
-    print("\n¡Extracción masiva completada!")
+    resumen = auditoria.finalizar()
+    return 1 if resumen['estado_global'] == 'CON_ERRORES' else 0
+
 
 if __name__ == '__main__':
-    extraer_todas_las_tablas()
+    sys.exit(main())

@@ -1,0 +1,4 @@
+[2026-11-05 22:06:09] === INICIO DE CORRIDA 20261105_220609 ===
+[2026-11-05 22:06:42] [CONEXION] ERROR en 32.729 s | (pyodbc.OperationalError) ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [53].  (53) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Login timeout expired (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]A network-related or instance-specific error has occurred while establishing a connection to SQL Server. Server is not found or not accessible. Check if instance name is correct and if SQL Server is configured to allow remote connections. For more information see SQL Server Books Online. (53)')
+(Background on this error at: https://sqlalche.me/e/21/e3q8)
+[2026-11-05 22:06:42] === FIN DE CORRIDA 20261105_220609 | duración total: 32.732 s | estado: CON_ERRORES ===
