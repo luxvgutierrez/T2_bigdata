@@ -1,0 +1,178 @@
+{
+  "E1_escalado": [
+    {
+      "escala": 1,
+      "filas_bronze": 58598,
+      "filas_silver": 58598,
+      "filas_rechazadas": 0,
+      "filas_gold": 59300,
+      "t_bronze_s": 3.652,
+      "t_silver_s": 14.202,
+      "t_gold_s": 15.678,
+      "t_total_s": 33.532,
+      "filas_por_segundo": 1747.5,
+      "tamano_gold_mb": 0.65
+    },
+    {
+      "escala": 5,
+      "filas_bronze": 290438,
+      "filas_silver": 290438,
+      "filas_rechazadas": 0,
+      "filas_gold": 296053,
+      "t_bronze_s": 0.68,
+      "t_silver_s": 9.195,
+      "t_gold_s": 14.663,
+      "t_total_s": 24.538,
+      "filas_por_segundo": 11836.3,
+      "tamano_gold_mb": 1.99
+    }
+  ],
+  "E2_formatos": {
+    "tabla": "Fact_Inventario_Snapshot",
+    "filas": 255200,
+    "t_lectura_csv_s": 0.104,
+    "t_lectura_parquet_s": 0.242,
+    "t_escritura_parquet_s": 0.956,
+    "mb_csv": 4.07,
+    "mb_parquet": 0.25,
+    "factor_compresion": 16.28,
+    "aceleracion_lectura": 0.43
+  },
+  "E3_particionado": {
+    "filas_totales": 25000,
+    "t_escritura_unica_s": 0.959,
+    "t_escritura_particionada_s": 1.776,
+    "mb_unica": 0.73,
+    "mb_particionada": 0.88,
+    "filas_mes": 1189,
+    "t_lectura_mes_unica_s": 0.261,
+    "t_lectura_mes_particionada_s": 0.12,
+    "aceleracion_lectura_filtrada": 2.18,
+    "particiones": 21
+  },
+  "E4_shuffle": [
+    {
+      "shuffle_partitions": 4,
+      "t_agregacion_s": 0.257
+    },
+    {
+      "shuffle_partitions": 16,
+      "t_agregacion_s": 0.248
+    },
+    {
+      "shuffle_partitions": 64,
+      "t_agregacion_s": 0.616
+    },
+    {
+      "shuffle_partitions": 200,
+      "t_agregacion_s": 1.525
+    }
+  ],
+  "E5_calidad": [
+    {
+      "fraccion_inyectada": 0.0,
+      "filas_ventas": 10000,
+      "errores_inyectados": 0,
+      "ids_con_error": 0,
+      "ids_detectados": 0,
+      "recall_global": null,
+      "precision_global": null,
+      "falsos_positivos": 0,
+      "por_tipo": {}
+    },
+    {
+      "fraccion_inyectada": 0.01,
+      "filas_ventas": 10050,
+      "errores_inyectados": 150,
+      "ids_con_error": 149,
+      "ids_detectados": 149,
+      "recall_global": 1.0,
+      "precision_global": 1.0,
+      "falsos_positivos": 0,
+      "por_tipo": {
+        "duplicado": {
+          "inyectados": 50,
+          "detectados": 50,
+          "recall": 1.0
+        },
+        "fecha_invalida": {
+          "inyectados": 17,
+          "detectados": 17,
+          "recall": 1.0
+        },
+        "huerfano": {
+          "inyectados": 16,
+          "detectados": 16,
+          "recall": 1.0
+        },
+        "importe_incoherente": {
+          "inyectados": 18,
+          "detectados": 18,
+          "recall": 1.0
+        },
+        "negativo": {
+          "inyectados": 17,
+          "detectados": 17,
+          "recall": 1.0
+        },
+        "nulo_clave": {
+          "inyectados": 18,
+          "detectados": 18,
+          "recall": 1.0
+        },
+        "texto_en_numero": {
+          "inyectados": 14,
+          "detectados": 14,
+          "recall": 1.0
+        }
+      }
+    },
+    {
+      "fraccion_inyectada": 0.05,
+      "filas_ventas": 10250,
+      "errores_inyectados": 750,
+      "ids_con_error": 736,
+      "ids_detectados": 736,
+      "recall_global": 1.0,
+      "precision_global": 1.0,
+      "falsos_positivos": 0,
+      "por_tipo": {
+        "duplicado": {
+          "inyectados": 250,
+          "detectados": 250,
+          "recall": 1.0
+        },
+        "fecha_invalida": {
+          "inyectados": 88,
+          "detectados": 88,
+          "recall": 1.0
+        },
+        "huerfano": {
+          "inyectados": 76,
+          "detectados": 76,
+          "recall": 1.0
+        },
+        "importe_incoherente": {
+          "inyectados": 92,
+          "detectados": 92,
+          "recall": 1.0
+        },
+        "negativo": {
+          "inyectados": 84,
+          "detectados": 84,
+          "recall": 1.0
+        },
+        "nulo_clave": {
+          "inyectados": 76,
+          "detectados": 76,
+          "recall": 1.0
+        },
+        "texto_en_numero": {
+          "inyectados": 84,
+          "detectados": 84,
+          "recall": 1.0
+        }
+      }
+    }
+  ]
+}

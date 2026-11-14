@@ -10,6 +10,10 @@ __pycache__/
 # Se regenera con: python ETL\etl-curado
 ETL/curated/
 
+# Datasets y salidas de Spark: se regeneran con generador_sintetico.py
+Spark/datos/
+Spark/salida/
+
 # Sistema operativo
 Thumbs.db
 .DS_Store

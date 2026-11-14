@@ -35,6 +35,14 @@ T2_bigdata/
     ├── processed/                # Silver (+ rechazados/ = cuarentena)
     ├── curated/                  # Gold (Parquet particionado + CSV para Power BI)
     └── auditoria/                # Log, resumen JSON e histórico por corrida
+└── Spark/                        # Procesamiento distribuido (local y Databricks)
+    ├── databricks_pipeline.py    # Notebook único para Databricks Free Edition
+    ├── pipeline_spark.py         # bronze -> silver -> gold + métricas
+    ├── generador_sintetico.py    # Datasets 1x..25x + errores con verdad conocida
+    ├── experimentos.py           # E1 escalado, E2 formatos, E3 particiones, E4 shuffle, E5 calidad
+    ├── config_spark.py           # Esquemas explícitos, claves y reglas
+    ├── resultados/               # experimentos.csv / .json / .md
+    └── README.md
 ```
 
 ## El modelo en estrella
@@ -57,6 +65,22 @@ proyecto_dw ──▶ raw/ (bronze) ──▶ processed/ (silver) ──▶ cura
 
 Contrato (capas, convenciones, tipos, granularidad, retención) en
 [`ETL/contrato_data_lake.md`](ETL/contrato_data_lake.md).
+
+## Procesamiento con Spark (Databricks)
+
+La misma lógica de calidad, implementada en Spark para volúmenes grandes:
+
+```powershell
+cd Spark
+python generador_sintetico.py --escalas 1,5,10   # real + sintéticos
+python pipeline_spark.py --datos datos\escala_5x --salida salida\escala_5x
+python experimentos.py --escalas 1,5,10          # E1..E5 -> resultados/
+```
+
+En **Databricks** (Free Edition): importar `Spark/databricks_pipeline.py` como
+notebook, adjuntar un cluster y ejecutar. El notebook descarga el código y los
+datos del repositorio, busca un Volume escribible y corre el pipeline completo.
+Detalles y resultados en [`Spark/README.md`](Spark/README.md).
 
 ## Ejecución
 
